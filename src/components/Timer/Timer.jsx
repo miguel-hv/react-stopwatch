@@ -8,20 +8,23 @@ const Timer = () => {
     // let isRunning = false;
     const countRef = useRef(null);
 
-    function handleStart() {
+    function handleStartPause() {
         if(!isRunning) {    
             countRef.current =  setInterval(()=>{setTimer(timer => timer + 1)}, 1 * ONE_SECOND);
             setIsRunning(true);
             // console.log(isRunning);
-        } 
+        } else {
+            clearInterval(countRef.current);
+            setIsRunning(false);
+        }
     }
 
-    function handlePause() {
-        clearInterval(countRef.current);
-        setIsRunning(false);
-        // console.log(isRunning);
+    // function handlePause() {
+    //     clearInterval(countRef.current);
+    //     setIsRunning(false);
+    //     // console.log(isRunning);
 
-    }
+    // }
 
     // function handleResume() {
     //     countRef.current =  setInterval(()=>{setTimer(timer => timer + 1)}, 1 * ONE_SECOND);
@@ -34,13 +37,13 @@ const Timer = () => {
         <div>
             <div> {timer} </div>
             <div>
-                <button onClick={handleStart}>
+                <button onClick={handleStartPause}>
                 {isRunning ? 
-                    "Resume" :
+                    "Pause" :
                     "Start" 
                 } 
                 </button>
-                <button onClick={handlePause}> Pause </button>
+                {/* <button onClick={handlePause}> Pause </button> */}
                 {/* <button onClick={handleResume}> Resume </button> */}
             </div>
         </div>

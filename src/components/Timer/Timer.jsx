@@ -5,6 +5,7 @@ const HUNDRETH_OF_SECOND = 10;
 const Timer = () => {
     const [timer, setTimer] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
+    const [lap, setLap] = useState([]);
     // let isRunning = false;
     const countRef = useRef(null);
 
@@ -25,6 +26,13 @@ const Timer = () => {
         if (!isRunning) {
             clearInterval(countRef.current);
             setTimer(0);
+        }
+    }
+
+    function handleLap(){
+        if(isRunning){
+            const newLap = formatTime();
+            setLap([...lap, newLap]);
         }
     }
 
@@ -52,8 +60,15 @@ const Timer = () => {
                 {!isRunning ? (
                     <button onClick={handleReset}> Reset </button>
                 ) : null}
-                {/* <button onClick={handleResume}> Resume </button> */}
+                <button onClick={handleLap}> Lap </button>
             </div>
+            <ul>
+                {lap.map((lap, key) => (
+                    <li key={key}>
+                        {lap}
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 };

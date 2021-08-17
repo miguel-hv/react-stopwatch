@@ -4,6 +4,6 @@ Following [this article](https://dev.to/abdulbasit313/how-to-develop-a-stopwatch
 
 ## Goals
 
-* useRef hook
+* useRef hook understanding
 * implement and undertand custom hooks (branch custom-hook)
 * review redux implementation and side-effects in slices

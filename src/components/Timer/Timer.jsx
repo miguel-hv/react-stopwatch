@@ -1,10 +1,10 @@
 import { useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-    decrement,
-    increment,
-    selectCount,
-} from "../../redux/reducers/counterSlice";
+import { 
+    newLap,
+    selectLap,
+    resetLap, 
+} from "../../redux/reducers/lapsSlice";
 import {
     pauseTimer,
     resetTimer,
@@ -15,18 +15,13 @@ import {
 const HUNDRETH_OF_SECOND = 10;
 
 const Timer = () => {
-    // const [timer, setTimer] = useState(0);
     const [isRunning, setIsRunning] = useState(false);
-    const [lap, setLap] = useState([]);
-    // let isRunning = false;
     const countRef = useRef(null);
 
     const dispatch = useDispatch();
     const time = useSelector(selectTime);
+    const lap = useSelector(selectLap);
 
-    const sum = 5;
-
-    const count = useSelector(selectCount);
 
     function handleStartPause() {
         if (!isRunning) {
@@ -43,13 +38,14 @@ const Timer = () => {
     function handleReset() {
         if (!isRunning) {
             dispatch(resetTimer(countRef.current));
+            dispatch(resetLap());
         }
     }
 
     function handleLap() {
         if (isRunning) {
-            const newLap = formatTime();
-            setLap([...lap, newLap]);
+            const addLap = formatTime();
+            dispatch(newLap(addLap));
         }
     }
 
@@ -66,20 +62,12 @@ const Timer = () => {
     return (
         <div>
             <div>
-                {time}
-                {/* {count} */}
-                {/* {formatTime()} */}
+                {formatTime()}
             </div>
             <div>
                 <button onClick={handleStartPause}>
                     {isRunning ? "Pause" : "Start"}
                 </button>
-                {/* <button onClick={()=>dispatch(increment(sum))}>
-                    +1
-                </button> */}
-                {/* <button onClick={()=>dispatch(decrement())}> */}
-                {/* -1 */}
-                {/* </button> */}
                 {!isRunning ? (
                     <button onClick={handleReset}> Reset </button>
                 ) : null}

@@ -52,10 +52,10 @@ const Timer = () => {
 
     return (
         <div>
-            <div>
+            <p>
                 {formatTime(time)}
-            </div>
-            <div>
+            </p>
+            <div className="buttons">
                 <button onClick={handleStartPause}>
                     {isRunning ? "Pause" : "Start"}
                 </button>
@@ -64,7 +64,7 @@ const Timer = () => {
                 ) : null}
                 <button onClick={handleLap}> Lap </button>
             </div>
-            <ul>
+            <ul className="laps">
                 {lap.map((lap, key) => (
                     <li key={key}>{lap}</li>
                 ))}

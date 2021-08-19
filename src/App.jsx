@@ -1,13 +1,15 @@
-import { Timer } from './components';
-import './App.scss';
+import { Timer } from "./components";
+import "./App.scss";
 
 function App() {
-  return (
-    <div className="App">
-      <h1>Stopwatch</h1>
-      <Timer/>
-    </div>
-  );
+    return (
+        <div className="App">
+            <h3>Stopwatch</h3>
+            <div className="stopwatch-card">
+                <Timer />
+            </div>
+        </div>
+    );
 }
 
 export default App;
